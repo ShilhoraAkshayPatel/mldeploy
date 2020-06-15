@@ -41,7 +41,7 @@ def predictiohelper(input):
 
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+cors = CORS(app)
 
 
 @app.route("/")
@@ -62,4 +62,4 @@ def predict():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(port=port, debug=True)
+    app.run(host='0.0.0.0', port=port)
