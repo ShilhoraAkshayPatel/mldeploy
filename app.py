@@ -44,7 +44,7 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
-@app.route("/api/index")
+@app.route("/")
 def index():
     return "go to /predict to get predction with json data as input"
 
