@@ -3,6 +3,7 @@ import tensorflow as tf
 import numpy as np
 from tensorflow.keras import backend
 from tensorflow.keras.models import load_model
+from flask_cors import CORS
 
 from oauth2client.client import GoogleCredentials
 import googleapiclient.discovery
@@ -40,14 +41,16 @@ def predictiohelper(input):
 
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
-@app.route("/")
+@app.route("/api/index")
 def index():
     return "go to /predict to get predction with json data as input"
 
 
-@app.route('/predict', methods=['POST'])
+@app.route('/api/predict', methods=['POST'])
+@cross_origin(allow_headers=['Content-Type'])
 def predict():
     predclass = {0: 'Iris-setosa', 1: 'Iris-versicolor', 2: 'Iris-virginica'}
     data = request.get_json(force=True)
